@@ -1,15 +1,15 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import joblib
-
+import os
 
 # Minor update to trigger deploy
 
 app = Flask(__name__)
 CORS(app)
 
-# Load model once when the app starts
-model = joblib.load("salary_predict_model.ml")
+model_path = os.path.join(os.path.dirname(__file__), "salary_predict_model.ml")
+model = joblib.load(model_path)
 
 
 @app.route("/")
